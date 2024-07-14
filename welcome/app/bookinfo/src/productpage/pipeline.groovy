@@ -2,12 +2,12 @@ pipeline {
     agent any
 
     parameters {
-       string( gitrepo = "https://github.com/Shiviell/devopshift-welcome.git" ) // Replace with your Docker registry URL
-        //dockerCredentials = 'your-docker-credentials-id'  // Replace with your Jenkins Docker credentials ID
+       string( gitrepo = "https://github.com/Shiviell/devopshift-welcome.git" ) 
+        //dockerCredentials = 'your-docker-credentials-id'  
        string( imageName = "productpage")  // Replace with your Docker image name
         string (BUILD_NUMBER="${env.BUILD_NUMBER}")
         string(branch = "jenkins-workshop")
-        string(dockerfile = "devopshift-welcome/welcome/app/bookinfo/src/productpage" ) // Assuming your Dockerfile is in the root of the repository
+        string(dockerfile = "devopshift-welcome/welcome/app/bookinfo/src/productpage" ) 
     }
 
     stages {
@@ -33,8 +33,13 @@ pipeline {
 
         stage('Test') {
             steps {
+                script {
                 // Run tests inside the Docker container
-                sh "docker run shivi2021/${imageName}:1.0.${BUILD_NUMBER}"
+                sh "docker run -it -d -p 9080:9080 --name productpage shivi2021/${imageName}:1.0.${BUILD_NUMBER}" // docker run -it -d -p 9080:9080 --name productpage shivi2021/productpage:1.0.5
+                sh "docker ps"
+                sh "docker stop productpage"
+                sh "docker rm productpage"
+                }
             }
         }
 
