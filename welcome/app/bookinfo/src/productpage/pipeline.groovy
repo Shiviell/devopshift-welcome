@@ -25,7 +25,7 @@ pipeline {
                     sh "pwd"
                     sh "cd ${dockerfile}"
                    
-                    sh "docker build--target build--tag shivi2021/${imageName}:1.0.${BUILD_NUMBER} ${dockerfile} "
+                    sh "docker build --target build --tag shivi2021/${imageName}:1.0.${BUILD_NUMBER} ${dockerfile} "
                     }
                 }
             }
