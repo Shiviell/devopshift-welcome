@@ -23,9 +23,9 @@ pipeline {
                 script {
                     // Build Docker image
                     sh "pwd"
-                    sh "cd ${dockerfile}"
+                    //sh "cd ${dockerfile}"
                    
-                    sh "docker build --target build --tag shivi2021/${imageName}:1.0.${BUILD_NUMBER} ${dockerfile} "
+                    sh "docker build -f ${dockerfile}/Dockerfile -t shivi2021/${imageName}:1.0.${BUILD_NUMBER} ${dockerfile}"
                     }
                 }
             }
