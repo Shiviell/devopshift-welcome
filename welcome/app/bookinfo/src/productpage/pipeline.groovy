@@ -47,8 +47,9 @@ pipeline {
             steps {
                 script {
                     // Push Docker image to registry
-                    docker.withRegistry("${dockerRegistry}", dockerCredentials) {
-                        customImage.push()
+                    withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                    sh "docker push shivi2021/${imageName}:1.0.${BUILD_NUMBER}"
                     }
                 }
             }
