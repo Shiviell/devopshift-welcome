@@ -16,7 +16,16 @@ spec:
     automated:
       prune: true
       selfHeal: true
-
+    hooks:
+      - type: PreSync
+        command: ["/bin/sh", "-c"]
+        args: ["echo PreSync hook executed"]
+      - type: SyncFail
+        command: ["/bin/sh", "-c"]
+        args: ["echo SyncFail hook executed"]
+      - type: PostSync
+        command: ["/bin/sh", "-c"]
+        args: ["echo PostSync hook executed"]
   # webhook:
   #   github:
   #     secret: webhook-secret
