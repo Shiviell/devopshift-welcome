@@ -18,7 +18,7 @@ reviews:
 
 productpage:
   image: docker.io/istio/examples-bookinfo-productpage-v1
-  replicas: 1
+  replicas: 3
 
 service:
   type: LoadBalancer
